@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>中国梦想游首页</title>
+<title>旅游网</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <link href="css/common.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
@@ -10,10 +10,8 @@
     <link href="css/ft-carousel.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/ft-carousel.min.js"></script>
     <style>
-
         .example {width: 1000px;height: 500px;text-align: center;margin: 20px auto;background-color: #464576;}
        /* .carousel-item{line-height: 336px;color: #fff;font-family:  Arial Black}*/
-
     </style>
 <script type="text/javascript">
 window.onload=function(){
@@ -59,7 +57,8 @@ window.onload=function(){
 </script>
 <script type="text/javascript"> 
     $(function(){
-        var wweya_li =$("div.tab_menu ul li");
+        var wweya_li =$("div." +
+            "tab_menu ul li");
         wweya_li.click(function(){
         $(this).addClass("selected")            
          .siblings().removeClass("selected");  
@@ -78,49 +77,72 @@ window.onload=function(){
 <body>
 <div class="top_hw clearfix">
     <div class="top_h clearfix">
-        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
-        <div class="top_hr"><a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span><a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
+        <div class="top_hr">
+            <a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span>
+            <a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
     </div>
 </div>
 <div class="head_w">
     <div class="head_t clearfix">
-        <div class="logo"><img src="images/logo.jpg"/></div>
-        <div class="rx_line"><img src="images/rx.jpg"/></div>
+       <img src="images/logo.png"/>
     </div>
 </div>
 <div class="mainNav clearfix">
     <ul class="Nav_ul">
-        <li  class="cur"><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
-        <li><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
-        <li><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
-        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
-        <li ><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
-        <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
-        <li ><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
-        <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
-        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+        <li  class="cur"><a th:href="@{/index}">首页</a></li>
+        <li><a th:href="@{/travelRoute}">旅游路线</a></li>
+        <li><a th:href="@{/travelSpot}">旅游景点</a></li>
+        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a></li>
+        <li ><a th:href="@{/car}">旅游车票</a></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a></li>
+        <li ><a th:href="@{/strategy}">旅游攻略</a></li>
+        <li><a th:href="@{/attention}">注意事项</a></li>
+        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a></li>
     </ul>
 </div>
-
-
-
-
 <div class="example" style="width: 1000px;height: 500px">
     <div class="ft-carousel" id="carousel_1">
         <ul class="carousel-inner">
-            <li class="carousel-item"><img src="images/aa3.jpg" /></li>
-            <li class="carousel-item"><img src="images/aa4.jpg" /></li>
-            <li class="carousel-item"><img src="images/aa7.jpg" /></li>
-
-
-
+            <li class="carousel-item"><img src="images/banner1.jpg" /></li>
+            <li class="carousel-item"><img src="images/banner2.jpg" /></li>
+            <li class="carousel-item"><img src="images/banner3.jpg" /></li>
+        </ul>
+    </div>
+</div>
+<div class="content" style="width: 1000px;height: 300px;margin:0 auto;margin-top:20px;background: white;">
+    <div class="title" style="width: 100%;height:30px;font-size: 20px;">
+        &nbsp;&nbsp;景点推荐
+    </div>
+    <hr/>
+    <div class="nr">
+       <ul style="padding: 0px;width: 100%;height: 240px;">
+           <li th:each="var,iterStat: ${pageData}" style="text-decoration: none;float:left;width: 22%;height:100%;margin-left: 8px;text-align:center;padding: 8px;border:1px solid aqua;">
+               <a th:href="@{/scenicSpotPortalView(id=${var.id})}">
+                   <img th:src="${var.imgUrl}"  style="width: 100%;height:90%;"/>
+                   <span th:text="${var.spotAddress}"></span>
+               </a>
+           </li>
+       </ul>
+    </div>
+</div>
+<div class="content" style="width: 1000px;height: 300px;margin:0 auto;margin-top:20px;background: white;">
+    <div class="title" style="width: 100%;height:30px;font-size: 20px;">
+        &nbsp;&nbsp;旅游攻略
+    </div>
+    <hr/>
+    <div class="nr">
+        <ul style="padding: 0px;width: 100%;height: 240px;">
+            <li th:each="var,iterStat: ${pageData1}" style="text-decoration: none;float:left;width: 22%;height:100%;margin-left: 8px;text-align:center;padding: 8px;border:1px solid aqua;">
+                <a th:href="@{/strategyPortalView(id=${var.id})}">
+                    <img th:src="${var.imgUrl}"  style="width: 100%;height:90%;"/>
+                    <span th:text="${var.title}"></span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>
 <script>
-
     $("#carousel_1").FtCarousel();
-
 </script>
 
 </body>

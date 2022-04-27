@@ -3,6 +3,7 @@ package com.cn.travel.cms.hotel.service.imp;
 import com.cn.travel.cms.hotel.dao.HotelDao;
 import com.cn.travel.cms.hotel.entity.Hotel;
 import com.cn.travel.cms.hotel.service.IHotelService;
+import com.cn.travel.cms.scenicSpotComment.entity.ScenicSpotComment;
 import com.cn.travel.utils.Tools;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -63,6 +64,11 @@ public class HotelService implements IHotelService {
         list = hotelDao.indexList();
         PageInfo<Hotel> pageInfo=new PageInfo<Hotel>(list);
         return pageInfo.getList();
+    }
+
+    @Override
+    public List<ScenicSpotComment> findCommentById(String id, String s) {
+        return hotelDao.findCommentById(id,s);
     }
 
     public long state0count()throws Exception{

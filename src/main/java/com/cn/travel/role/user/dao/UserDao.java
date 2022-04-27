@@ -1,6 +1,9 @@
 package com.cn.travel.role.user.dao;
 
 import com.cn.travel.base.dao.BaseDao;
+import com.cn.travel.cms.order.entity.Order;
+import com.cn.travel.cms.order.provider.OrderSqlProvider;
+import com.cn.travel.cms.scenicSpotComment.entity.ScenicSpotComment;
 import com.cn.travel.role.user.entity.Porvice;
 import com.cn.travel.role.user.entity.User;
 import com.cn.travel.role.user.provider.UserSqlProvider;
@@ -48,5 +51,6 @@ public interface UserDao extends BaseDao<User> {
 
     @SelectProvider(type = UserSqlProvider.class, method = "state2count")
     public long state2count();
-
+    @SelectProvider(type = UserSqlProvider.class, method = "findCommentListByUserId")
+    public List<ScenicSpotComment> findCommentListByUserId(@Param("userId") String userId);
 }

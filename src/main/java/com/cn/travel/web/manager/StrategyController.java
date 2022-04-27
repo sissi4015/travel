@@ -109,7 +109,7 @@ public class StrategyController  extends BaseController {
                 int size = (int) file1.getSize();
                 System.out.println(fileName + "-->" + size);
 
-                String path = "E:/idea/travel/target/classes/static/strategy" ;
+                String path = "D:/idea/travel/target/classes/static/strategy" ;
                 File dest = new File(path + "/" + fileName);
                 if(!dest.getParentFile().exists()){ //判断文件父目录是否存在
                     dest.getParentFile().mkdir();
@@ -129,7 +129,7 @@ public class StrategyController  extends BaseController {
                 int size = (int) file2.getSize();
                 System.out.println(fileName + "-->" + size);
 
-                String path = "E:/idea/travel/target/classes/static/strategy" ;
+                String path = "D:/idea/travel/target/classes/static/strategy" ;
                 File dest = new File(path + "/" + fileName);
                 if(!dest.getParentFile().exists()){ //判断文件父目录是否存在
                     dest.getParentFile().mkdir();

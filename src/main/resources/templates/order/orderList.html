@@ -52,14 +52,17 @@
 					<td th:text="${var.userName}"></td>
 					<td th:text="${var.productName}"></td>
 					<td th:if="${var.productType==0}">旅游路线</td>
-						<td th:if="${var.productType==1}">旅游景点</td>
-						<td th:if="${var.productType==2}">酒店</td>
-						<td th:if="${var.state==''}"></td>
+					<td th:if="${var.productType==1}">旅游景点</td>
+					<td th:if="${var.productType==2}">旅游酒店</td>
+					<td th:if="${var.productType==3}">旅游车票</td>
+					<td th:if="${var.productType==4}">旅游保险</td>
+					<!--<td th:if="${var.state==''}"></td>-->
 					<td th:text="${var.fee}"></td>
-						<td th:if="${var.state==0}">待付款</td>
-						<td th:if="${var.state==1}">已付款</td>
-						<td th:if="${var.state==2}">已撤销</td>
-						<td th:if="${var.state==''}"></td>
+					<td th:if="${var.state==0}">待付款</td>
+					<td th:if="${var.state==1}">已付款</td>
+					<td th:if="${var.state==2}">已撤销</td>
+					<td th:if="${var.state==3}">已付款</td>
+					<td th:if="${var.state==''}"></td>
 					<td>
 						<a class="layui-btn layui-btn-xs" th:href="@{/manager/orderView(id=${var.id})}">
 							<i class="layui-icon">&#xe60a;</i>

@@ -1,5 +1,6 @@
 package com.cn.travel.cms.scenicSpot.provider;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -46,4 +47,28 @@ public class ScenicSpotSqlProvider {
     public String state1count(){ return "SELECT count(*) FROM t_cms_scenic_spot WHERE DELETE_STATUS=0 AND STATE=1"; }
 
     public String state2count(){ return "SELECT count(*) FROM t_cms_scenic_spot WHERE DELETE_STATUS=0 AND STATE=2"; }
+
+    public String addComment(){
+        return "INSERT INTO t_cms_pj_scenic(id,pjyh,pjcp,pjdj,pjnr,pjtime,pjbz,pjcpimgurl,pjcpname,pjcptype) VALUES(#{id},#{pjyh},#{pjcp},#{pjdj},#{pjnr},#{pjtime},#{pjbz},#{pjcpimgurl},#{pjcpname},#{pjcptype})";
+    }
+    public String findCommentById(){
+        return "SELECT a.pjdj,a.pjnr,a.pjtime,b.USER_NAME as pjyh FROM t_cms_pj_scenic a,t_pz_user b WHERE a.pjyh = b.ID AND a.pjcptype = #{status} AND a.pjcp = #{id}";
+    }
+    public String commentcount(){ return "SELECT count(*) FROM t_cms_pj_scenic"; }
+
+    public String findCommentList(){
+        return "SELECT * FROM t_cms_pj_scenic ORDER BY pjtime DESC";
+    }
+
+    public String findCommentListByQuery(){
+        return "SELECT * FROM t_cms_pj_scenic WHERE pjcpname LIKE #{query,jdbcType=VARCHAR} ORDER BY pjtime DESC";
+    }
+    public String findScenicCommentById(){
+        return "SELECT * FROM t_cms_pj_scenic WHERE id = #{id}";
+    }
+
+    public String deleteCommentByid(){
+        return "delete from t_cms_pj_scenic WHERE id = #{id}";
+    }
+
 }

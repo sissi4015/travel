@@ -1,7 +1,10 @@
 package com.cn.travel.role.user.service;
 
+import com.cn.travel.cms.order.entity.Order;
+import com.cn.travel.cms.scenicSpotComment.entity.ScenicSpotComment;
 import com.cn.travel.role.user.entity.Porvice;
 import com.cn.travel.role.user.entity.User;
+import com.cn.travel.web.base.PageParam;
 
 import java.util.List;
 
@@ -26,5 +29,7 @@ public interface IUserService {
     public List<Porvice> countPorvice()throws Exception;
 
     public User login(String userName, String password)throws Exception;
+
+    public PageParam<ScenicSpotComment> findByPageByUserId(int currentPage, int pageSize, String pjyh)throws Exception;
 
 }

@@ -1,6 +1,7 @@
 package com.cn.travel.cms.hotel.service;
 
 import com.cn.travel.cms.hotel.entity.Hotel;
+import com.cn.travel.cms.scenicSpotComment.entity.ScenicSpotComment;
 
 import java.util.List;
 
@@ -21,4 +22,7 @@ public interface IHotelService {
     public List<Hotel> findByPage(int currentPage, int pageSize, String query)throws Exception;
 
     public List<Hotel> findByPage(int currentPage, int pageSize)throws Exception;
+
+    public List<ScenicSpotComment> findCommentById(String id, String s);
+
 }

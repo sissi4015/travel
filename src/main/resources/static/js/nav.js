@@ -1,11 +1,11 @@
 var navs = [{
 	"title" : "后台首页",
-	"icon" : "&#xe600;",
+	"icon" : "&#xe620;",
 	"href" : "/manager/main",
 	"spread" : false
 },{
 	"title" : "用户管理",
-	"icon" : "&#xe600;",
+	"icon" : "&#xe620;",
 	"href" : "",
 	"spread" : false,
 	"children" : [
@@ -24,7 +24,7 @@ var navs = [{
 	]
 },{
 	"title" : "内容管理",
-	"icon" : "&#xe600;",
+	"icon" : "&#xe620;",
 	"href" : "",
 	"spread" : false,
 	"children" : [
@@ -73,7 +73,7 @@ var navs = [{
 	]
 },{
     "title" : "业务管理",
-    "icon" : "&#xe600;",
+    "icon" : "&#xe620;",
     "href" : "",
     "spread" : false,
     "children" : [
@@ -82,11 +82,16 @@ var navs = [{
             "icon" : "&#xe631;",
             "href" : "/manager/orderList",
             "spread" : false
+        },{
+            "title" : "评论管理",
+            "icon" : "&#xe631;",
+            "href" : "/manager/commentList",
+            "spread" : false
         }
     ]
 },{
 	"title" : "数据分析",
-	"icon" : "&#xe600;",
+	"icon" : "&#xe620;",
 	"href" : "",
 	"spread" : false,
      "children" : [
@@ -134,7 +139,7 @@ var navs = [{
     ]
 }/*,{
 	"title" : "系统基本参数",
-	"icon" : "&#xe600;",
+	"icon" : "&#xe620;",
 	"href" : "/manager/systemParameter",
 	"spread" : false
 }*/]

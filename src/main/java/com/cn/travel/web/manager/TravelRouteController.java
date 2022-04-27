@@ -107,7 +107,7 @@ public class TravelRouteController extends BaseController {
                 int size = (int) file.getSize();
                 System.out.println(fileName + "-->" + size);
 
-                String path = "E:/idea/travel/target/classes/static/travelRoute" ;
+                String path = "D:/idea/travel/target/classes/static/travelRoute" ;
                 File dest = new File(path + "/" + fileName);
                 if(!dest.getParentFile().exists()){ //判断文件父目录是否存在
                     dest.getParentFile().mkdir();

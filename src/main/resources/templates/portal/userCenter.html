@@ -2,34 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>中国梦想游-会员登录页</title>
+<title>会员登录页</title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <link href="css/common.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div class="top_hw clearfix">
     <div class="top_h clearfix">
-        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
-        <div class="top_hr"><a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span><a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
+        <div class="top_hr">
+            <a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span>
+            <a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
     </div>
 </div>
 <div class="head_w">
     <div class="head_t clearfix">
-        <div class="logo"><img src="images/logo.jpg"/></div>
-        <div class="rx_line"><img src="images/rx.jpg"/></div>
+        <img src="images/logo.png"/>
     </div>
 </div>
 <div class="mainNav clearfix">
     <ul class="Nav_ul">
-        <li><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
-        <li><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
-        <li><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
-        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
-        <li ><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
-        <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
-        <li ><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
-        <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
-        <li th:if="${session.userName!=null}" class="cur"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/index}">首页</a></li>
+        <li><a th:href="@{/travelRoute}">旅游路线</a></li>
+        <li ><a th:href="@{/travelSpot}">旅游景点</a></li>
+        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a></li>
+        <li ><a th:href="@{/car}">旅游车票</a></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a></li>
+        <li ><a th:href="@{/strategy}">旅游攻略</a></li>
+        <li ><a th:href="@{/attention}">注意事项</a></li>
+        <li class="cur" th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a></li>
     </ul>
 </div>
 <div class="b_wrap">
@@ -42,6 +42,7 @@
                 	<li class="f1">订单中心</li>
                 	<li> >><a th:href="@{/myOrder}">我的订单</a> </li>
                     <li> >><a th:href="@{/myMessage}">我的留言</a> </li>
+                    <li> >><a th:href="@{/myComment}">我的评价</a> </li>
                 </ul>
 
                 <ul>

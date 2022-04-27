@@ -1,10 +1,14 @@
 package com.cn.travel.role.user.service.imp;
 
+import com.cn.travel.cms.order.entity.Order;
+import com.cn.travel.cms.scenicSpotComment.entity.ScenicSpotComment;
 import com.cn.travel.role.user.dao.UserDao;
 import com.cn.travel.role.user.entity.Porvice;
 import com.cn.travel.role.user.entity.User;
 import com.cn.travel.role.user.service.IUserService;
 import com.cn.travel.utils.Tools;
+import com.cn.travel.web.base.PageParam;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -60,6 +64,18 @@ public class UserService implements IUserService {
         }
         PageInfo<User> pageInfo=new PageInfo<User>(list);
         return pageInfo.getList();
+    }
+
+    public PageParam<ScenicSpotComment> findByPageByUserId(int currentPage, int pageSize, String userId)throws Exception{
+        PageParam<ScenicSpotComment> pageParam = new PageParam<>();
+        Page page = PageHelper.startPage(currentPage, pageSize);
+        List<ScenicSpotComment> list = userDao.findCommentListByUserId(userId);
+        pageParam.setResult(list);
+        pageParam.setSize(page.getPages());
+        pageParam.setCount(page.getTotal());
+        pageParam.setPageNumber(currentPage);
+        pageParam.setPageSize(pageSize);
+        return pageParam;
     }
 
     public List<Porvice> countPorvice()throws Exception{

@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>会员中心页</title>
+<!--<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="ueditor/ueditor.config.js" type="text/javascript"></script>
+<script src="ueditor/ueditor.all.min.js" type="text/javascript"></script>
+<script src="ueditor/lang/zh-cn/zh-cn.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="top_hw clearfix">
+    <div class="top_h clearfix">
+        <div class="top_hr">
+            <a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span>
+            <a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
+    </div>
+</div>
+<div class="head_w">
+    <div class="head_t clearfix">
+        <img src="images/logo.png"/>
+    </div>
+</div>
+<div class="mainNav clearfix">
+    <ul class="Nav_ul">
+        <li><a th:href="@{/index}">首页</a></li>
+        <li><a th:href="@{/travelRoute}">旅游路线</a></li>
+        <li><a th:href="@{/travelSpot}">旅游景点</a></li>
+        <li><a th:href="@{/hotelAccommodation}">餐饮住宿</a></li>
+        <li ><a th:href="@{/car}">旅游车票</a></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a></li>
+        <li ><a th:href="@{/strategy}">旅游攻略</a></li>
+        <li ><a th:href="@{/attention}">注意事项</a></li>
+        <li class="cur" th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a></li>
+    </ul>
+</div>
+<div class="b_wrap">
+    <div class="current"><span>当前所在地：</span><a th:href="@{/index}">首页</a> >> <a th:href="@{/useCenter}">会员中心</a></div>
+    <div class="fmember">
+    	<div class="fmleft">
+        	<div class="fmleft_top"><img src="images/fmbt1.png" border="0"/></div>
+            <div class="fmlist">
+                <ul>
+                    <li class="f1">订单中心</li>
+                    <li> >><a th:href="@{/myOrder}">我的订单</a> </li>
+                    <li> >><a th:href="@{/myMessage}">我的留言</a> </li>
+                    <li> >><a th:href="@{/myComment}">我的评价</a> </li>
+                </ul>
+                <ul>
+                    <li class="f1">账户信息</li>
+                    <li> >><a th:href="@{/personInfo}">个人资料</a> </li>
+                    <li> >><a th:href="@{/changePassword}">修改密码</a> </li>
+                </ul>
+            </div>
+        </div>
+        <div class="fmright">
+        	<div class="fmr1">
+            	<div class="fmr1_top">我的评论</div>
+                <div class="fmr1_m">
+                	<div class="fmyor">
+                    	<ul>
+                        	<li class="f2">添加评论信息</li>
+                        </ul>
+                    </div>
+                      <div class="forder" style="padding: 20px;">
+                        <form action="/addSpotComment" method="post">
+                          <div>
+                              <input type="hidden" name="pjcp" th:value="${pjsp}"/>
+                              <input type="hidden" name="pjyh" th:value="${session.yhid}"/>
+                              <input type="hidden" name="orderid" th:value="${orderid}"/>
+                              <input type="hidden" name="cptype" th:value="${cptype}"/>
+
+                              <span style="font-size:18px;color:gray;">评论等级：</span>
+                              <input type="radio" name="pjdj" value="好评" class="gcs-radio" checked/><span style="font-size:15px;margin-left:5px;margin-right:10px;color:gray;">好评</span>
+                              <input type="radio" name="pjdj" value="中评" class="gcs-radio" /><span style="font-size:15px;margin-left:5px;margin-right:10px;color:gray;">中评</span>
+                              <input type="radio" name="pjdj" value="差评" class="gcs-radio" /><span style="font-size:15px;margin-left:5px;color:gray;">差评</span>
+                          </div>
+                          <div style="margin-top: 20px;">
+                              <p style="font-size:18px;color:gray;">评论内容：<span style="font-size:15px;color:red;" th:text="${message}"></span></p>
+                              <p>&nbsp;</p>
+                              <p>&nbsp;</p>
+                              <textarea  id="pjnr" name="pjnr"></textarea>
+                          </div>
+                        <div style="margin-top: 20px;">
+                            <button style="background:#009688;border-radius:2px;color:white;width: 80px;height:30px;line-height:20px;text-align: center;">点击提交</button>
+                            <button style="background:#009688;border-radius:5px;color:white;width: 80px;height:30px;line-height:20px;text-align: center;">点击重置</button>
+                        </div>
+                        </form>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+
+    .gcs-radio {
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        display: inline-block;
+        text-align: center;
+        vertical-align: bottom;
+        border: 1px solid gray;
+        border-radius: 50%;
+    }
+    .gcs-radio:hover {
+        border: 1px solid #009688;
+        cursor: pointer;
+    }
+    .gcs-radio:checked {
+        background: #009688;
+        border: 1px solid #009688;
+    }
+
+</style>
+<script>
+    UE.getEditor('pjnr',{initialFrameWidth:600,initialFrameHeight:300});
+</script>
+</body>
+</html>

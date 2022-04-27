@@ -45,4 +45,7 @@ public class HotelSqlProvider {
     public String state1count(){ return "SELECT count(*) FROM t_cms_hotel WHERE DELETE_STATUS=0 AND STATE=1"; }
     public String state2count(){ return "SELECT count(*) FROM t_cms_hotel WHERE DELETE_STATUS=0 AND STATE=2"; }
 
+    public String findCommentById(){
+        return "SELECT a.pjdj,a.pjnr,a.pjtime,b.USER_NAME as pjyh FROM t_cms_pj_scenic a,t_pz_user b WHERE a.pjyh = b.ID AND a.pjcptype = #{status} AND a.pjcp = #{id}";
+    }
 }

@@ -2,6 +2,7 @@ package com.cn.travel.web.manager;
 
 import com.cn.travel.cms.scenicSpot.entity.ScenicSpot;
 import com.cn.travel.cms.scenicSpot.service.imp.ScenicSpotService;
+import com.cn.travel.cms.scenicSpotComment.entity.ScenicSpotComment;
 import com.cn.travel.utils.Tools;
 import com.cn.travel.web.base.BaseController;
 import com.cn.travel.web.base.PageParam;
@@ -24,7 +25,43 @@ public class ScenicSpotController extends BaseController {
     @Autowired
     ScenicSpotService scenicSpotService;
 
-    @RequestMapping("/scenicSpotList")
+    @RequestMapping("/commentList")
+    public ModelAndView commentList(PageParam pageParam, @RequestParam(value = "query", required = false) String query){
+        ModelAndView mv = this.getModeAndView();
+        if(pageParam.getPageNumber()<1){
+            pageParam =new PageParam();
+            long count = 0;
+            try {
+                count = scenicSpotService.commentcount();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            pageParam.setCount(count);
+            if(count<=10){
+                pageParam.setSize(1);
+            }else{
+                pageParam.setSize(count%10==0?count/10:count/10+1);
+            }
+            pageParam.setPageNumber(1);
+            pageParam.setPageSize(10);
+        }
+        List<ScenicSpotComment> list = scenicSpotService.findCommentByPage(pageParam.getPageNumber(),pageParam.getPageSize(), query);
+        mv.addObject("pageData", list);
+        if (Tools.notEmpty(query)) {
+            mv.addObject("query", query);
+            pageParam.setCount(list.size());
+            if (list.size() > pageParam.getPageSize()) {
+                pageParam.setSize(list.size() / pageParam.getPageSize());
+            } else {
+                pageParam.setSize(1);
+            }
+        }
+        mv.addObject("pageParam",pageParam);
+        mv.setViewName("comment/scenicCommentList");
+        return mv;
+    }
+
+@RequestMapping("/scenicSpotList")
     public ModelAndView scenicSpotList(PageParam pageParam, @RequestParam(value = "query", required = false) String query){
         ModelAndView mv = this.getModeAndView();
         if(pageParam.getPageNumber()<1){
@@ -60,6 +97,7 @@ public class ScenicSpotController extends BaseController {
         return mv;
     }
 
+
     @RequestMapping("/scenicSpotAdd")
     public ModelAndView scenicSpotAdd(){
         ModelAndView mv = this.getModeAndView();
@@ -67,7 +105,17 @@ public class ScenicSpotController extends BaseController {
         mv.setViewName("scenicSpot/scenicSpotEdit");
         return mv;
     }
-
+    @RequestMapping("/scenicCommentView")
+    public ModelAndView scenicCommentView(String id){
+        ModelAndView mv = this.getModeAndView();
+        try {
+            mv.addObject("entity",scenicSpotService.findScenicCommentById(id));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        mv.setViewName("comment/scenicCommentView");
+        return mv;
+    }
     @RequestMapping("/scenicSpotView")
     public ModelAndView scenicSpotView(String id){
         ModelAndView mv = this.getModeAndView();
@@ -107,7 +155,7 @@ public class ScenicSpotController extends BaseController {
                 int size = (int) file.getSize();
                 System.out.println(fileName + "-->" + size);
 
-                String path = "E:/idea/travel/target/classes/static/scenicSpot" ;
+                String path = "D:/idea/travel/target/classes/static/scenicSpot" ;
                 File dest = new File(path + "/" + fileName);
                 if(!dest.getParentFile().exists()){ //判断文件父目录是否存在
                     dest.getParentFile().mkdir();
@@ -134,6 +182,17 @@ public class ScenicSpotController extends BaseController {
         return REDIRECT+"/manager/scenicSpotList";
     }
 
+    @RequestMapping("/scenicCommentDelete")
+    public String scenicCommentDelete(String id){
+        if(Tools.notEmpty(id)){
+            try {
+                scenicSpotService.deleteComentByid(id);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return REDIRECT+"/manager/commentList";
+    }
     @RequestMapping("/scenicSpotDelete")
     public String scenicSpotDelete(String id){
         if(Tools.notEmpty(id)){

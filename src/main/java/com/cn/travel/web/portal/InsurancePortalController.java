@@ -4,6 +4,7 @@ import com.cn.travel.cms.insurance.entity.Insurance;
 import com.cn.travel.cms.insurance.service.imp.InsuranceService;
 import com.cn.travel.cms.order.entity.Order;
 import com.cn.travel.cms.order.service.imp.OrderService;
+import com.cn.travel.cms.strategy.service.imp.StrategyService;
 import com.cn.travel.cms.travelRoute.entity.TravelRoute;
 import com.cn.travel.cms.travelRoute.service.imp.TravelRouteService;
 import com.cn.travel.role.user.entity.User;
@@ -27,6 +28,8 @@ public class InsurancePortalController extends BaseController {
     UserService userService;
     @Autowired
     OrderService orderService;
+    @Autowired
+    StrategyService strategyService;
 
     @RequestMapping("/insurance")
     public ModelAndView insurance(PageParam pageParam){
@@ -49,6 +52,8 @@ public class InsurancePortalController extends BaseController {
             pageParam.setPageSize(7);
         }
         mv.addObject("pageData", insuranceService.findByPage(pageParam.getPageNumber(),pageParam.getPageSize()));
+        mv.addObject("pageDataStrate", strategyService.findByPage(1,5));
+
         mv.addObject("pageParam",pageParam);
         mv.setViewName("portal/insurance");
         return mv;
@@ -62,6 +67,7 @@ public class InsurancePortalController extends BaseController {
         }catch (Exception e){
             e.printStackTrace();
         }
+        mv.addObject("pageDataStrate", strategyService.findByPage(1,5));
         mv.setViewName("portal/insuranceView");
         return mv;
     }

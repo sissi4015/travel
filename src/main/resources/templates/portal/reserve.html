@@ -9,27 +9,27 @@
 <body>
 <div class="top_hw clearfix">
     <div class="top_h clearfix">
-        <div class="top_hl"><span>欢迎来到中国梦想游，让你的梦想全程免费自由行！</span> 预定热线：<b>0571-63322269</b></div>
-        <div class="top_hr"><a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span><a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
+        <div class="top_hr">
+            <a th:if="${session.userName==null}" th:href="@{/register}">会员注册</a>  |  <span th:if="${session.userName!=null}" th:text="'欢迎你，'+${session.userName}"></span>
+            <a th:if="${session.userName==null}" th:href="@{/goLogin}">登录</a>  |  <a th:if="${session.userName!=null}" th:href="@{/goLogout}">退出</a></div>
     </div>
 </div>
 <div class="head_w">
     <div class="head_t clearfix">
-        <div class="logo"><img src="images/logo.jpg"/></div>
-        <div class="rx_line"><img src="images/rx.jpg"/></div>
+        <img src="images/logo.png"/>
     </div>
 </div>
 <div class="mainNav clearfix">
     <ul class="Nav_ul">
-        <li><a th:href="@{/index}">首页</a><img src="images/nav_line.jpg"/></li>
-        <li><a th:href="@{/travelRoute}">旅游路线</a><img src="images/nav_line.jpg"/></li>
-        <li><a th:href="@{/travelSpot}">旅游景点</a><img src="images/nav_line.jpg"/></li>
-        <li   class="cur"><a th:href="@{/hotelAccommodation}">餐饮住宿</a><img src="images/nav_line.jpg"/></li>
-        <li ><a th:href="@{/car}">旅游车票</a><img src="images/nav_line.jpg"/></li>
-        <li ><a th:href="@{/insurance}">旅游保险</a><img src="images/nav_line.jpg"/></li>
-        <li ><a th:href="@{/strategy}">旅游攻略</a><img src="images/nav_line.jpg"/></li>
-        <li><a th:href="@{/attention}">注意事项</a><img src="images/nav_line.jpg"/></li>
-        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a><img src="images/nav_line.jpg"/></li>
+        <li><a th:href="@{/index}">首页</a></li>
+        <li><a th:href="@{/travelRoute}">旅游路线</a></li>
+        <li><a th:href="@{/travelSpot}">旅游景点</a></li>
+        <li class="cur"><a th:href="@{/hotelAccommodation}">餐饮住宿</a></li>
+        <li ><a th:href="@{/car}">旅游车票</a></li>
+        <li ><a th:href="@{/insurance}">旅游保险</a></li>
+        <li ><a th:href="@{/strategy}">旅游攻略</a></li>
+        <li ><a th:href="@{/attention}">注意事项</a></li>
+        <li th:if="${session.userName!=null}"><a th:href="@{/userCenter}">会员中心</a></li>
     </ul>
 </div>
 <div class="b_wrap">
@@ -55,6 +55,7 @@
             <table class="cr_table" width="680" border="0" cellspacing="0" cellpadding="0">
                 <form method="post" action="/hotelCreatOrder">
                 <input th:value="${entity.id}" id="hotelId" name="hotelId" type="hidden"/>
+                    <input th:value="${entity.price}" id="price" name="price" type="hidden"/>
                 <tbody>
               <tr>
                 <td class="td01">酒店名称：</td>

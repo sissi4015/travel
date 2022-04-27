@@ -4,9 +4,11 @@ import com.cn.travel.role.user.entity.User;
 import com.cn.travel.role.user.service.imp.UserService;
 import com.cn.travel.utils.Tools;
 import com.cn.travel.web.base.BaseController;
+import com.cn.travel.web.base.PageParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -37,6 +39,7 @@ public class UserPortalController extends BaseController {
             }else{
                 if (user.getState() == 1) {
                     httpSession.setAttribute("userName",userName);
+                    httpSession.setAttribute("yhid",user.getId());
                     return new ModelAndView(new RedirectView("/userCenter"));
                 } else {
                     redirectAttributes.addFlashAttribute("message","账户已被注销!");
@@ -142,4 +145,30 @@ public class UserPortalController extends BaseController {
         mv.setViewName("portal/userCenter");
         return mv;
     }
+//    /**
+//     * 功能介绍：查询个人的评论信息
+//     * 参数介绍(@param)：
+//     * 返回值介绍(@return):
+//     **/
+    @RequestMapping("/myComment")
+    public ModelAndView myOrder(HttpSession httpSession,
+                                @RequestParam(value = "pageNum", required = false, defaultValue = "1") int pageNum,
+                                @RequestParam(value = "pageSize", required = false, defaultValue = "7") int pageSize
+    ) throws Exception {
+
+        ModelAndView mv = this.getModeAndView();
+
+        User user = userService.findByUserName(httpSession.getAttribute("userName").toString());
+
+        PageParam pageParam = userService.findByPageByUserId(pageNum,pageSize,user.getId());
+
+        mv.addObject("pageData", pageParam.getResult());
+
+        mv.addObject("pageParam",pageParam);
+
+        mv.setViewName("portal/myComment");
+
+        return mv;
+    }
+
 }

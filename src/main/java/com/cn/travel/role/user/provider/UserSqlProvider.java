@@ -52,4 +52,8 @@ public class UserSqlProvider {
     public String state2count(){
         return "SELECT count(*) FROM t_pz_user WHERE STATE=2  AND DELETE_STATUS=0";
     }
+
+    public String findCommentListByUserId(){
+        return "SELECT * FROM t_cms_pj_scenic WHERE pjyh=#{userId} ORDER BY pjtime DESC";
+    }
 }

@@ -2,6 +2,7 @@ package com.cn.travel.web.portal;
 
 import com.cn.travel.cms.order.entity.Order;
 import com.cn.travel.cms.order.service.imp.OrderService;
+import com.cn.travel.cms.scenicSpot.service.IScenicSpotService;
 import com.cn.travel.cms.travelRoute.entity.TravelRoute;
 import com.cn.travel.cms.travelRoute.service.imp.TravelRouteService;
 import com.cn.travel.role.user.entity.User;
@@ -26,9 +27,11 @@ public class TravelRoutePortalController extends BaseController {
     UserService userService;
     @Autowired
     OrderService orderService;
+    @Autowired
+    IScenicSpotService scenicSpotService;
 
     @RequestMapping("/travelRoute")
-    public ModelAndView travelRoute(PageParam pageParam){
+    public ModelAndView travelRoute(PageParam pageParam)throws Exception{
         ModelAndView mv = this.getModeAndView();
         if(pageParam.getPageNumber()<1){
             pageParam =new PageParam();
@@ -48,19 +51,21 @@ public class TravelRoutePortalController extends BaseController {
             pageParam.setPageSize(7);
         }
         mv.addObject("pageData", travelRouteService.findByPage(pageParam.getPageNumber(),pageParam.getPageSize()));
+        mv.addObject("pageDataScenic", scenicSpotService.findByPage(1,5));
         mv.addObject("pageParam",pageParam);
         mv.setViewName("portal/travelRoute");
         return mv;
     }
 
     @RequestMapping("/travelRoutePortalView")
-    public ModelAndView travelRoutePortalView(String id){
+    public ModelAndView travelRoutePortalView(String id)throws Exception{
         ModelAndView mv = this.getModeAndView();
         try {
             mv.addObject("entity",travelRouteService.findById(id));
         }catch (Exception e){
             e.printStackTrace();
         }
+        mv.addObject("pageDataScenic", scenicSpotService.findByPage(1,5));
         mv.setViewName("portal/travelRouteView");
         return mv;
     }

@@ -42,7 +42,7 @@
 		<div class="layui-form-item">
 			<label class="layui-form-label">产品类型</label>
 			<div class="layui-input-block">
-				<	<input type="radio" th:checked="${entity.productType==0?'checked':'false'}" name="productType" value="0" title="旅游路线"/>
+				<input type="radio" th:checked="${entity.productType==0?'checked':'false'}" name="productType" value="0" title="旅游路线"/>
 				<input type="radio" th:checked="${entity.productType==1?'checked':'false'}" name="productType" value="1" title="旅游景点"/>
 				<input type="radio" th:disabled="${entity.productType!=2?'disabled':'false'}" th:checked="${entity.productType==2?'checked':'false'}" name="productType" value="2" title="酒店"/>
 			</div>

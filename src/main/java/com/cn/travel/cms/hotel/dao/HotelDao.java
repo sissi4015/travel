@@ -3,6 +3,8 @@ package com.cn.travel.cms.hotel.dao;
 import com.cn.travel.base.dao.BaseDao;
 import com.cn.travel.cms.hotel.entity.Hotel;
 import com.cn.travel.cms.hotel.provider.HotelSqlProvider;
+import com.cn.travel.cms.scenicSpot.provider.ScenicSpotSqlProvider;
+import com.cn.travel.cms.scenicSpotComment.entity.ScenicSpotComment;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
@@ -45,5 +47,6 @@ public interface HotelDao extends BaseDao<Hotel> {
     public long state1count();
     @SelectProvider(type = HotelSqlProvider.class, method = "state2count")
     public long state2count();
-
+    @SelectProvider(type = HotelSqlProvider.class, method = "findCommentById")
+    List<ScenicSpotComment> findCommentById(@Param("id")String id,@Param("status")String status);
 }

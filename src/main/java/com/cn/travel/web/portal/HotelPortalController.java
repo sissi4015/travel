@@ -1,5 +1,6 @@
 package com.cn.travel.web.portal;
 
+import com.cn.travel.cms.car.service.imp.CarService;
 import com.cn.travel.cms.hotel.entity.Hotel;
 import com.cn.travel.cms.hotel.service.imp.HotelService;
 import com.cn.travel.cms.order.entity.Order;
@@ -27,6 +28,8 @@ public class HotelPortalController extends BaseController {
     UserService userService;
     @Autowired
     OrderService orderService;
+    @Autowired
+    CarService carService;
 
     @RequestMapping("/hotelAccommodation")
     public ModelAndView hotelAccommodation(PageParam pageParam){
@@ -49,6 +52,7 @@ public class HotelPortalController extends BaseController {
             pageParam.setPageSize(7);
         }
         mv.addObject("pageData", hotelService.findByPage(pageParam.getPageNumber(),pageParam.getPageSize()));
+        mv.addObject("pageDataCar", carService.findByPage(1,5));
         mv.addObject("pageParam",pageParam);
         mv.setViewName("portal/hotelAccommodation");
         return mv;
@@ -62,7 +66,10 @@ public class HotelPortalController extends BaseController {
         }catch (Exception e){
             e.printStackTrace();
         }
+        mv.addObject("pageDataComment",hotelService.findCommentById(id,"2"));
         mv.setViewName("portal/hotelAccommodationView");
+        mv.addObject("pageDataCar", carService.findByPage(1,5));
+
         return mv;
     }
 
@@ -103,6 +110,7 @@ public class HotelPortalController extends BaseController {
             order.setProductName(hotel.getHotelName());
             order.setProductType(2);
             order.setState(0);
+            order.setFee(hotel.getPrice());
             order.setOrderCode("O"+Tools.getUUID().substring(0,6).toUpperCase());
             order.setOrderTime(Tools.date2Str(new Date(),"yyyy-MM-dd"));
             orderService.save(order);

@@ -1,6 +1,7 @@
 package com.cn.travel.web.portal;
 
 import com.cn.travel.cms.strategy.service.imp.StrategyService;
+import com.cn.travel.cms.travelRoute.service.imp.TravelRouteService;
 import com.cn.travel.web.base.BaseController;
 import com.cn.travel.web.base.PageParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ public class StrategyPortalController extends BaseController {
 
     @Autowired
     StrategyService strategyService;
+    @Autowired
+    TravelRouteService travelRouteService;
 
     @RequestMapping("/strategy")
     public ModelAndView strategy(PageParam pageParam) throws Exception {
@@ -35,6 +38,8 @@ public class StrategyPortalController extends BaseController {
             pageParam.setPageSize(7);
         }
         mv.addObject("pageData", strategyService.findByPage(pageParam.getPageNumber(),pageParam.getPageSize()));
+        mv.addObject("pageDataTravel", travelRouteService.findByPage(1,5));
+
         mv.addObject("pageParam",pageParam);
         mv.setViewName("portal/strategy");
         return mv;
@@ -48,7 +53,9 @@ public class StrategyPortalController extends BaseController {
         }catch (Exception e){
             e.printStackTrace();
         }
+        mv.addObject("pageDataTravel", travelRouteService.findByPage(1,5));
         mv.setViewName("portal/strategyView");
+
         return mv;
     }
 }

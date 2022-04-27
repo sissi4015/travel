@@ -1,5 +1,5 @@
 function navBar(data){
-	var ulHtml = '<ul class="layui-nav layui-nav-tree">';
+	var ulHtml = '<ul style="background: #009688;" class="layui-nav layui-nav-tree">';
 	for(var i=0;i<data.length;i++){
 		if(data[i].spread){
 			ulHtml += '<li class="layui-nav-item layui-nav-itemed">';

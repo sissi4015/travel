@@ -2,6 +2,7 @@ package com.cn.travel.web.portal;
 
 import com.cn.travel.cms.car.entity.Car;
 import com.cn.travel.cms.car.service.imp.CarService;
+import com.cn.travel.cms.insurance.service.imp.InsuranceService;
 import com.cn.travel.cms.order.entity.Order;
 import com.cn.travel.cms.order.service.imp.OrderService;
 import com.cn.travel.cms.travelRoute.entity.TravelRoute;
@@ -27,6 +28,8 @@ public class CarPortalController extends BaseController {
     UserService userService;
     @Autowired
     OrderService orderService;
+    @Autowired
+    InsuranceService insuranceService;
 
     @RequestMapping("/car")
     public ModelAndView travelRoute(PageParam pageParam){
@@ -49,6 +52,7 @@ public class CarPortalController extends BaseController {
             pageParam.setPageSize(7);
         }
         mv.addObject("pageData", carService.findByPage(pageParam.getPageNumber(),pageParam.getPageSize()));
+        mv.addObject("pageDataInsur", insuranceService.findByPage(1,5));
         mv.addObject("pageParam",pageParam);
         mv.setViewName("portal/car");
         return mv;
@@ -63,6 +67,7 @@ public class CarPortalController extends BaseController {
             e.printStackTrace();
         }
         mv.setViewName("portal/carView");
+        mv.addObject("pageDataInsur", insuranceService.findByPage(1,5));
         return mv;
     }
 
