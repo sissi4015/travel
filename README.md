@@ -1,5 +1,5 @@
 # travel
-基于SpringBoot的旅游信息管理系统
+基于SpringBoot的旅游网站管理系统
 
 项目分前后台
 
