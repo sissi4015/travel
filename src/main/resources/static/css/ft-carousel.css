@@ -68,10 +68,10 @@ ol {
 
 .ft-carousel .carousel-prev-btn {
 	left: 0;
-	background: url(../img/prev.png) no-repeat;
+	background: url(../images/prev.png) no-repeat;
 }
 
 .ft-carousel .carousel-next-btn {
 	right: 0;
-	background: url(../img/next.png) no-repeat;
+	background: url(../images/next.png) no-repeat;
 }
