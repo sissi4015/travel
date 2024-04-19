@@ -11,6 +11,7 @@ PS:如有必要，在application.yml中修改数据库配置
 
 ##启动程序
 1.idea集成tomcat部署启动
+2.springboot内部tomcat启动（TravelApplication）
 
 ##访问
 前台
